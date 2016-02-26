@@ -1,0 +1,183 @@
+*** Settings ***
+Resource          ../PubResource_POM/Game_Web/Web_Bussiness.txt
+
+*** Variables ***
+${activityname}    RF活动标题
+${activitydesc}    RF活动描述
+${activityrule}    RF活动规则
+${receiveWay}     RF活动奖品领取方式
+${editRecommend}    RF活动编辑推荐语
+
+*** Test Cases ***
+重新上架活动并编辑_有奖下载(虚拟奖品)_aos
+    [Tags]    suite_id=360297    author=hzzhengxinghua    auto    tc_id=369422
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${activityname}    Util Add String    ${activityname}    有奖下载虚拟aos    ${randomstr}
+    ${activitydesc}    Util Add String    ${activitydesc}    有奖下载虚拟aos    ${randomstr}
+    ${activityrule}    Util Add String    ${activityrule}    有奖下载虚拟aos    ${randomstr}
+    ${receiveWay}    Util Add String    ${receiveWay}    有奖下载虚拟aos    ${randomstr}
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_上架活动    http://game.yixin.im/backend/op/activity-aos-list/    //div[@data-value='245000']/b[@class='w-btn w-btn-submit']
+    Web运营_进入活动编辑页面    http://game.yixin.im/backend/op/activity-id-245000
+    Web运营_编辑活动并保存    ${activityname}    ${activitydesc}    ${activityrule}    ${receiveWay}    ${CURDIR}${/}..${/}resource${/}activitypic.jpg
+    Web Page Should Contain    ${activityname}
+    [Teardown]    Web Close Browser
+
+下架活动_aos
+    [Tags]    suite_id=360297    author=hzzhengxinghua    auto    tc_id=369432
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_下架活动    http://game.yixin.im/backend/op/activity-aos-list/    //div[@data-value='245000']/b[@class='w-btn w-btn-warning']
+    Web Click Text Button    已下架活动（展开）
+    sleep    2s
+    Web Page Should Contain Element    //div[@data-value='245000']/b[1][@style='display: none;']
+    [Teardown]    Web Close Browser
+
+重新上架活动并编辑_有奖充值_aos
+    [Tags]    suite_id=360297    author=hzzhengxinghua    auto    tc_id=369423
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${activityname}    Util Add String    ${activityname}    有奖充值aos    ${randomstr}
+    ${activitydesc}    Util Add String    ${activitydesc}    有奖充值aos    ${randomstr}
+    ${activityrule}    Util Add String    ${activityrule}    有奖充值aos    ${randomstr}
+    ${receiveWay}    Util Add String    ${receiveWay}    有奖充值aos    ${randomstr}
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_上架活动    http://game.yixin.im/backend/op/activity-aos-list/    //div[@data-value='245001']/b[@class='w-btn w-btn-submit']
+    Web运营_进入活动编辑页面    http://game.yixin.im/backend/op/activity-id-245001
+    Web运营_编辑活动并保存    ${activityname}    ${activitydesc}    ${activityrule}    ${receiveWay}    ${CURDIR}${/}..${/}resource${/}activitypic.jpg
+    Web Page Should Contain    ${activityname}
+    Web运营_下架活动    http://game.yixin.im/backend/op/activity-aos-list/    //div[@data-value='245001']/b[@class='w-btn w-btn-warning']
+    [Teardown]    Web Close Browser
+
+重新上架活动并编辑_有奖下载(实物奖品)_aos
+    [Tags]    suite_id=360297    author=hzzhengxinghua    auto    tc_id=369426
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${activityname}    Util Add String    ${activityname}    有奖下载实物aos    ${randomstr}
+    ${activitydesc}    Util Add String    ${activitydesc}    有奖下载实物aos    ${randomstr}
+    ${activityrule}    Util Add String    ${activityrule}    有奖下载实物aos    ${randomstr}
+    ${receiveWay}    Util Add String    ${receiveWay}    有奖下载实物aos    ${randomstr}
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_上架活动    http://game.yixin.im/backend/op/activity-aos-list/    //div[@data-value='245003']/b[@class='w-btn w-btn-submit']
+    Web运营_进入活动编辑页面    http://game.yixin.im/backend/op/activity-id-245003
+    Web运营_编辑活动并保存    ${activityname}    ${activitydesc}    ${activityrule}    ${receiveWay}    ${CURDIR}${/}..${/}resource${/}activitypic.jpg
+    Web Page Should Contain    ${activityname}
+    Web运营_下架活动    http://game.yixin.im/backend/op/activity-aos-list/    //div[@data-value='245003']/b[@class='w-btn w-btn-warning']
+    [Teardown]    Web Close Browser
+
+重新上架活动并编辑_公告活动_aos
+    [Tags]    suite_id=360297    author=hzzhengxinghua    auto    tc_id=369425
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${activityname}    Util Add String    ${activityname}    公告活动aos    ${randomstr}
+    ${activitydesc}    Util Add String    ${activitydesc}    公告活动aos    ${randomstr}
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_上架活动    http://game.yixin.im/backend/op/activity-aos-list/    //div[@data-value='245006']/b[@class='w-btn w-btn-submit']
+    Web运营_进入活动编辑页面    http://game.yixin.im/backend/op/activity-id-245006
+    Web运营_编辑公告活动    ${activityname}    ${activitydesc}    ${CURDIR}${/}..${/}resource${/}activitypic.jpg
+    Web Page Should Contain    ${activityname}
+    Web运营_下架活动    http://game.yixin.im/backend/op/activity-aos-list/    //div[@data-value='245006']/b[@class='w-btn w-btn-warning']
+    [Teardown]    Web Close Browser
+
+重新上架活动并编辑_专题活动_aos
+    [Tags]    suite_id=360297    author=hzzhengxinghua    auto    tc_id=369424
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${activityname}    Util Add String    ${activityname}    专题活动aos    ${randomstr}
+    ${activitydesc}    Util Add String    ${activitydesc}    专题活动aos    ${randomstr}
+    ${editRecommend}    Util Add String    ${editRecommend}    专题活动aos    ${randomstr}
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_上架活动    http://game.yixin.im/backend/op/activity-aos-list/    //div[@data-value='245002']/b[@class='w-btn w-btn-submit']
+    Web运营_进入活动编辑页面    http://game.yixin.im/backend/op/activity-id-245002
+    Web运营_编辑专题活动    ${activityname}    ${activitydesc}    ${CURDIR}${/}..${/}resource${/}activitypic.jpg    ${editRecommend}
+    Web Page Should Contain    ${activityname}
+    Web运营_下架活动    http://game.yixin.im/backend/op/activity-aos-list/    //div[@data-value='245002']/b[@class='w-btn w-btn-warning']
+    [Teardown]    Web Close Browser
+
+重新上架活动并编辑_有奖下载(虚拟奖品)_ios
+    [Tags]    suite_id=360297    author=hzzhengxinghua    auto    tc_id=369468
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${activityname}    Util Add String    ${activityname}    有奖下载虚拟ios    ${randomstr}
+    ${activitydesc}    Util Add String    ${activitydesc}    有奖下载虚拟ios    ${randomstr}
+    ${activityrule}    Util Add String    ${activityrule}    有奖下载虚拟ios    ${randomstr}
+    ${receiveWay}    Util Add String    ${receiveWay}    有奖下载虚拟ios    ${randomstr}
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_上架活动    http://game.yixin.im/backend/op/activity-ios-list/    //div[@data-value='245004']/b[@class='w-btn w-btn-submit']
+    Web运营_进入活动编辑页面    http://game.yixin.im/backend/op/activity-id-245004
+    Web运营_编辑活动并保存    ${activityname}    ${activitydesc}    ${activityrule}    ${receiveWay}    ${CURDIR}${/}..${/}resource${/}activitypic.jpg
+    Web Go To    http://game.yixin.im/backend/op/activity-ios-list/
+    sleep    2s
+    Web Page Should Contain    ${activityname}
+    [Teardown]    Web Close Browser
+
+下架活动_ios
+    [Tags]    suite_id=360297    author=hzzhengxinghua    auto    tc_id=369477
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_下架活动    http://game.yixin.im/backend/op/activity-ios-list/    //div[@data-value='245004']/b[@class='w-btn w-btn-warning']
+    Web Click Text Button    已下架活动（展开）
+    sleep    2s
+    Web Page Should Contain Element    //div[@data-value='245004']/b[1][@style='display: none;']
+    [Teardown]    Web Close Browser
+
+重新上架活动并编辑_有奖下载(实物奖品)_ios
+    [Tags]    suite_id=360297    author=hzzhengxinghua    auto    tc_id=369472
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${activityname}    Util Add String    ${activityname}    有奖下载实物ios    ${randomstr}
+    ${activitydesc}    Util Add String    ${activitydesc}    有奖下载实物ios    ${randomstr}
+    ${activityrule}    Util Add String    ${activityrule}    有奖下载实物ios    ${randomstr}
+    ${receiveWay}    Util Add String    ${receiveWay}    有奖下载实物ios    ${randomstr}
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_上架活动    http://game.yixin.im/backend/op/activity-ios-list/    //div[@data-value='245005']/b[@class='w-btn w-btn-submit']
+    Web运营_进入活动编辑页面    http://game.yixin.im/backend/op/activity-id-245005
+    Web运营_编辑活动并保存    ${activityname}    ${activitydesc}    ${activityrule}    ${receiveWay}    ${CURDIR}${/}..${/}resource${/}activitypic.jpg
+    Web Go To    http://game.yixin.im/backend/op/activity-ios-list/
+    sleep    2s
+    Web Page Should Contain    ${activityname}
+    Web运营_下架活动    http://game.yixin.im/backend/op/activity-ios-list/    //div[@data-value='245005']/b[@class='w-btn w-btn-warning']
+    [Teardown]    Web Close Browser
+
+重新上架活动并编辑_公告活动_ios
+    [Tags]    suite_id=360297    author=hzzhengxinghua    auto    tc_id=369471
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${activityname}    Util Add String    ${activityname}    公告活动ios    ${randomstr}
+    ${activitydesc}    Util Add String    ${activitydesc}    公告活动ios    ${randomstr}
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_上架活动    http://game.yixin.im/backend/op/activity-ios-list/    //div[@data-value='245008']/b[@class='w-btn w-btn-submit']
+    Web运营_进入活动编辑页面    http://game.yixin.im/backend/op/activity-id-245008
+    Web运营_编辑公告活动    ${activityname}    ${activitydesc}    ${CURDIR}${/}..${/}resource${/}activitypic.jpg
+    Web Go To    http://game.yixin.im/backend/op/activity-ios-list/
+    sleep    1s
+    Web Page Should Contain    ${activityname}
+    Web运营_下架活动    http://game.yixin.im/backend/op/activity-ios-list/    //div[@data-value='245008']/b[@class='w-btn w-btn-warning']
+    [Teardown]    Web Close Browser
+
+重新上架活动并编辑_专题活动_ios
+    [Tags]    suite_id=360297    author=hzzhengxinghua    auto    tc_id=369470
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${activityname}    Util Add String    ${activityname}    专题活动ios    ${randomstr}
+    ${activitydesc}    Util Add String    ${activitydesc}    专题活动ios    ${randomstr}
+    ${editRecommend}    Util Add String    ${editRecommend}    专题活动ios    ${randomstr}
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_上架活动    http://game.yixin.im/backend/op/activity-ios-list/    //div[@data-value='245007']/b[@class='w-btn w-btn-submit']
+    Web运营_进入活动编辑页面    http://game.yixin.im/backend/op/activity-id-245007
+    Web运营_编辑专题活动    ${activityname}    ${activitydesc}    ${CURDIR}${/}..${/}resource${/}activitypic.jpg    ${editRecommend}
+    Web Page Should Contain    ${activityname}
+    Web运营_下架活动    http://game.yixin.im/backend/op/activity-ios-list/    //div[@data-value='245007']/b[@class='w-btn w-btn-warning']
+    [Teardown]    Web Close Browser

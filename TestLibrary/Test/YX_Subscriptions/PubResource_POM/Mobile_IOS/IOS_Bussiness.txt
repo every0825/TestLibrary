@@ -1,0 +1,80 @@
+*** Settings ***
+Documentation     Page Object Mode 方式提供基于IOS APP页面的 业务关键字， 供测试用例／用例关键字 使用。
+...               | IOSAPP首页_登入易信 | \ ${YX_ID} | ${YX_Password} |
+...               | IOSAPP主菜单页_进入分页 | 发现 |
+Resource          ../../../../Resources/IOS_Config.txt
+Resource          UIElement.txt    # Element Mapping, 元素对应表 定义
+
+*** Keywords ***
+IOSAPP首页_登入易信
+    [Arguments]    ${YX_username}    ${YX_password}
+    [Documentation]    IOSAPP首页_登入易信 example:
+    ...    | IOSAPP首页_登入易信 | 15600000001 | 123456 |
+    Run Keyword And Continue On Failure    Mobile Click Element    ${IOSAPP_首页.alert_OK}
+    Mobile Click Element    ${IOSAPP_首页.Button_Login}
+    sleep    3s
+    Mobile Input Text    ${IOSAPP_登录页.InputText_Username}    ${YX_username}
+    Mobile Input Text    ${IOSAPP_登录页.InputText_Password}    ${YX_password}
+    Mobile Click Element    ${IOSAPP_登录页.Button_Login}
+
+IOSAPP主菜单页_进入分页
+    [Arguments]    ${MainTab}    # 根据最新APP页面显示， M40有： 消息／电话／好友／发现／我
+    [Documentation]    IOSAPP主菜单页_进入分页 example:
+    ...    | IOSAPP主菜单页_进入分页 | {WhichTab} |
+    ...    | IOSAPP主菜单页_进入分页 | 好友 |
+    Run Keyword And Continue On Failure    Mobile Click Element    ${IOSAPP_主菜单页.alert_OK}
+    Run Keyword And Continue On Failure    Mobile Click Text Button    开启易信
+    #Run Keyword And Continue On Failure    Mobile Click Element    ${IOSAPP_主菜单页.Button_FirstOpen}
+    Mobile Click Text Button    ${MainTab}
+
+IOSAPP好友页_进入公众号页
+    [Documentation]    IOSAPP好友页_进入公众号页 example:
+    ...    | IOSAPP好友页_进入公众号页 |
+    Mobile Click Element    ${IOSAPP_好友页.Button_Subscription}
+
+IOSAPP公众号页_进入分页
+    [Arguments]    ${tabname}    # M40有： 会话／精选／分类
+    [Documentation]    IOSAPP公众号页_进入分页 example:
+    ...    | IOSAPP公众号页_进入分页 | {WhichTab} |
+    ...    | IOSAPP公众号页_进入分页 | 会话 |
+    Mobile Click Text Button    ${tabname}
+
+进入IOS易信客户端公众号
+    [Arguments]    ${sub_name}
+    [Documentation]    access to 指定 \ subscriptions(公众号)
+    ...    e.g: \ YX_Subscriptions_access your_subscription
+    ...    \ \ \ \ \ YX_Subscriptions_access 网易青果
+    ...    \ \ \ \
+    sleep    4s
+    Run Keyword and Ignore Error    applib.Click Element    id=OK
+    sleep    2s
+    applib.Click Element    id=开启易信
+    sleep    1s
+    applib.Click Element    id=好友
+    sleep    4s
+    applib.Click Element    id=public icon normal
+    sleep    2s
+    applib.Click Element    id=${sub_name}
+    sleep    2s
+    Run Keyword and Ignore Error    applib.Click Element    id=关注    #try for new subscriptions visit
+    sleep    2s
+    applib.Click Element    id=查看消息
+    sleep    2s
+    Run Keyword and Ignore Error    applib.Click Element    id=好
+
+退出IOS易信客户端公众号
+    [Arguments]    ${sub_view}=None
+    [Documentation]    quit from subscriptions back to main view
+    ...    e.g: \ YX_Subscriptions_quit
+    ...    \ \ \ \ \ YX_Subscriptions_quit
+    ...    \ \ \ \
+    log    ${sub_view}
+    sleep    2s
+    applib.Click Element    id=btn back normal
+    sleep    2s
+    applib.Click Element    id=btn back normal
+    sleep    2s
+    applib.Click Element    id=btn back normal
+    sleep    2s
+    Run keyword if    '${sub_view}'=='None'    sleep    2s
+    ...    ELSE    applib.ClickElement    id=${sub_view}

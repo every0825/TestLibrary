@@ -1,0 +1,9 @@
+*** Settings ***
+Library           ios_uielement_update.py    # test lib for ui element update
+
+*** Variables ***
+&{IOSAPP_首页}      alert_OK=id=OK    Button_Register=id=注册    Button_Login=id=登录    # APP首页 UI元素对应表(UI Mappint Table)
+&{IOSAPP_登录页}     InputText_Username=xpath=//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIATextField[2]    InputText_Password=xpath=//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIASecureTextField[1]    Button_Login=//UIAApplication[1]/UIAWindow[1]/UIAScrollView[1]/UIAButton[5]    # APP登录页 UI元素对应表(UI Mappint Table)
+&{IOSAPP_主菜单页}    alert_OK=id=OK    Button_FirstOpen=id=开启易信    Button_YXMessage=id=易信    Button_Phone=id=电话    Button_Friend=id=好友    Button_Discovery=id=发现    Button_Personal=id=我
+...               # APP主菜单页的 UI元素对应表(UI Mappint Table)
+&{IOSAPP_好友页}     Button_Subscription=id=public icon normal    Button_ChatList=id=chat list normal    Button_Contact=id=contact icon normal    # APP好友页的 UI元素对应表(UI Mappint Table)

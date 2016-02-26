@@ -1,0 +1,24 @@
+*** Settings ***
+Force Tags        suite_id=360297
+Resource          ../PubResource_POM/Game_Web/Web_Bussiness.txt
+
+*** Test Cases ***
+运营AOS游戏推荐设置
+    [Tags]    author=wangzhong    toreview    tc_id=369433    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_AOS游戏推荐
+    Page Should Contain element    //tr[1]/td[2]/div/div/div/ul/li[1]
+    Page Should Contain element    //tr[1]/td[3]/div/div/div/ul/li[2]
+    [Teardown]    Web Close Browser
+
+运营IOS游戏推荐设置
+    [Tags]    author=wangzhong    toreview    tc_id=369478    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_IOS游戏推荐
+    Page Should Contain element    //tr[1]/td[2]/div/div/div/ul/li[1]
+    Page Should Contain element    //tr[1]/td[3]/div/div/div/ul/li[2]
+    [Teardown]    Web Close Browser

@@ -1,0 +1,20 @@
+*** Variables ***
+&{AndroidAPP欢迎页}    button_login=identifier=login_btn
+&{AndroidAPP登录页}    input_username=identifier=editUserid    input_password=identifier=editPassword    button_login=identifier=btn_login
+&{AndroidAPP主页}    button_search=identifier=action_search    button_friend=xpath=//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.LinearLayout[4]    button_found=xpath=//android.widget.HorizontalScrollView/android.widget.LinearLayout/android.widget.LinearLayout[3]
+&{AndroidAPP好友页}    button_plus=identifier=public_area
+&{AndroidAPP公众号名片页}    button_chatmsg=identifier=pa_profile_chat
+&{AndroidAPP公众号聊天页}    input_edittext=identifier=editTextMessage    button_sendmsg=identifier=buttonSendMessage
+&{AndroidAPP发现页}    button_game=xpath=//android.widget.ListView/android.widget.RelativeLayout[6]
+&{AndroidAPP游戏中心页}    view_activitycenter=accessibility_id=活动中心    button_quit=accessibility_id=✕    view_giftcenter=accessibility_id=礼包中心    view_gamefirstzone=accessibility_id=抢先专区    view_banner1=accessibility_id=pr_skljukzyzlhyk5zwynryww==_1438057462_49219127    view_allplaying_game=accessibility_id=webview_ico_home_games_all_played_2x    view_banner2=accessibility_id=pr_rr5q90ahhyka9sqqilirmq==_1447747230_78994045
+...               view_more_games=accessibility_id=更多游戏    view_gametype=accessibility_id=游戏分类    view_label_hot=accessibility_id=热门    view_label_onlygame=accessibility_id=独家    view_label_firstgame=accessibility_id=首发
+${返回按钮}           accessibility_id=转到上一层级
+&{AndroidAPP游戏详情页}    gamedown=accessibility_id=继续    gamestatus=accessbility_id=下载中    link_gamedetail=accessibility_id=游戏详细信息
+&{AndroidAPP游戏分类页}    view_uitest=accessibility_id=UI自动化    view_qipai=accessibility_id=棋牌
+&{AndroidAPP游戏活动中心页}
+&{AndroidAPP游戏礼包中心页}    view_uitest=accessibility_id=UI自动化测试游戏--勿动
+&{AndroidAPP活动详情页}
+&{AndroidAPP礼包详情页}
+&{AndroidAPP我的活动页}
+&{AndroidAPP我的礼包页}
+&{AndroidAPP游戏列表页}    view_racestars=accessibility_id=F1 Race Stars

@@ -1,0 +1,12 @@
+*** Settings ***
+Resource          common_resources.txt
+Library           Selenium2Library    run_on_failure=weblib.Capture Page Screenshot    WITH NAME    weblib    #Lib for PC web; | # Sets default timeout to 10 seconds and Capture Page Screenshot if failure happen
+Library           WebLibrary.py    #提供统一的Web端UI基础关键词，以Web_ 为前缀
+
+*** Keywords ***
+启动Chrome浏览器
+    [Arguments]    ${url}
+    Web Open Browser    ${url}
+
+关闭Chrome浏览器
+    Web Close Browser

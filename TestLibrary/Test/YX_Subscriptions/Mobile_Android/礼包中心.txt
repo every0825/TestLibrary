@@ -1,0 +1,10 @@
+*** Settings ***
+Resource          ../PubResource_POM/Mobile_Android/Android_Bussiness.txt
+
+*** Test Cases ***
+礼包中心页_检查热门礼包
+    [Tags]    author=hzweiyating    tc_id=
+    AndroidAPP游戏中心页_进入礼包中心
+    AndroidAPP礼包中心_检查礼包
+    AndroidAPP礼包中心_点击礼包
+    Mobile Click Element    accessibility_id=转到上一层级

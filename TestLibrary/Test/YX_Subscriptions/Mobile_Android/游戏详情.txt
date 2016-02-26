@@ -1,0 +1,20 @@
+*** Settings ***
+Resource          ../PubResource_POM/Mobile_Android/Android_Bussiness.txt
+
+*** Test Cases ***
+游戏详情页_检查游戏内容展示
+    [Tags]    author=hzzhengxinghua    tc_id=
+    Mobile_Click_WebView_Element    accessibility_id=pr_0fepsc4gvmvir2t60n6vfg==_1449728488_85276
+    sleep    2s
+    Mobile Page Should Contain Text    AutoUI测试特供游戏求勿动hoho
+    Mobile Page Should Contain Text    AutoUI测试特供游戏求勿动游戏介绍hoho
+
+游戏详情页_检查游戏详细信息页
+    [Tags]    author=hzzhengxinghua    tc_id=
+    AndroidApp游戏详情页_点击进入游戏详细信息展示页
+    Mobile Page Should Contain Text    zxh ✕ 易信
+    Mobile Page Should Contain Text    版　本
+    Mobile Click Element    accessibility_id=转到上一层级
+    sleep    1s
+    Mobile Click Element    accessibility_id=转到上一层级
+    sleep    1s

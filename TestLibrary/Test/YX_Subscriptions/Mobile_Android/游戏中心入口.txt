@@ -1,0 +1,12 @@
+*** Settings ***
+Resource          ../PubResource_POM/Mobile_Android/Android_Bussiness.txt
+
+*** Test Cases ***
+游戏中心入口--检查时效文案设置
+    [Documentation]    后台必须设置好此文案
+    [Tags]    author=hzzhengxinghua    tc_id=
+    [Setup]    启动Android客户端应用
+    AndroidAPP登录页_登入Android易信APP    18657181234    qa1234
+    AndroidAPP主页_进入发现页
+    sleep    10s
+    AndroidAPP发现页_检查游戏中心入口文案是否显示    我是UI自动化推荐游戏，请勿动

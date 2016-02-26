@@ -1,0 +1,99 @@
+*** Settings ***
+Resource          ../PubResource_POM/Mobile_Android/Android_Bussiness.txt
+
+*** Test Cases ***
+游戏中心首页--检查并关闭浮层推广位
+    [Tags]    author=hzzhengxinghua    tc_id=
+    #AndroidAPP登录页_登入Android易信APP    18657181234    qa1234
+    #AndroidAPP主页_进入发现页
+    AndroidAPP发现页_进入游戏中心
+    sleep    8s
+    AndroidAPP游戏中心页_判断首次进入广告浮层是否加载并关闭    accessibility_id=✕
+
+游戏中心首页--验证进入活动中心
+    [Documentation]    活动中心列表要至少存在1个活动
+    [Tags]    author=hzzhengxinghua    tc_id=
+    AndroidAPP游戏中心页_进入活动中心
+    sleep    3s
+    Mobile Page Should Contain Text    立即参加
+    Mobile Click Element    accessibility_id=转到上一层级
+    sleep    1s
+
+游戏中心首页--验证进入礼包中心
+    [Tags]    author=hzzhengxinghua    tc_id=
+    AndroidAPP游戏中心页_进入礼包中心
+    sleep    2s
+    Mobile Page Should Contain Text    热门礼包
+    Mobile Click Element    accessibility_id=转到上一层级
+    sleep    1s
+
+游戏中心首页-验证进入游戏分类
+    [Tags]    author=hzweiyating    tc_id=
+    AndroidAPP游戏中心页_进入游戏分类
+    sleep    5s
+    Mobile Page Should Contain Text    游戏排行榜
+    Mobile Click Element    accessibility_id=转到上一层级
+    sleep    2s
+
+游戏中心首页--验证进入抢先专区
+    [Documentation]    抢先专区入口暂时关闭，用例暂时注释掉
+    #AndroidAPP游戏中心页_进入抢先专区
+    #sleep    1s
+    #Mobile Page Should Contain Text    抢先体验
+    #Mobile Click Element    accessibility_id=转到上一层级
+    #sleep    1s
+
+游戏中心首页--验证一级banner
+    [Tags]    author=hzzhengxinghua    tc_id=
+    AndroidAPP游戏中心页_点击一级banner
+    sleep    2s
+    Mobile Page Should Contain Text    游戏简介
+    Mobile Click Element    accessibility_id=转到上一层级
+    sleep    2s
+
+游戏中心首页--检查大家都在玩游戏列表
+    [Documentation]    后台设置“UI自动化测试游戏--勿动”为最新游戏
+    [Tags]    author=hzzhengxinghua    tc_id=
+    Mobile Page Should Contain Text    UI自动化测试游戏--勿动
+    Mobile Page Should Contain Element    accessibility_id=webview_ico_home_games_all_played_2x
+
+游戏中心首页--验证二级banner
+    [Tags]    author=hzzhengxinghua    tc_id=
+    AndroidAPP游戏中心页_点击二级banner
+    sleep    2s
+    Mobile Page Should Contain Text    游戏简介
+    Mobile Click Element    accessibility_id=转到上一层级
+    sleep    2s
+
+游戏中心首页--验证更多游戏
+    [Tags]    author=hzzhengxinghua    tc_id=
+    AndroidAPP游戏中心页_点击更多游戏进入游戏分类
+    sleep    1s
+    Mobile Page Should Contain Text    游戏排行榜
+    Mobile Page Should Contain Text    全部
+    Mobile Click Element    accessibility_id=转到上一层级
+    sleep    2s
+
+游戏中心首页--热门标签
+    [Tags]    author=hzzhengxinghua    tc_id=
+    Mobile Page Should Contain Element    accessibility_id=热门
+    sleep    1s
+
+游戏中心首页--首发标签
+    [Tags]    author=hzzhengxinghua    tc_id=
+    Mobile Page Should Contain Element    accessibility_id=首发
+    sleep    1s
+
+游戏中心首页--独家标签
+    [Tags]    author=hzzhengxinghua    tc_id=
+    Mobile Page Should Contain Element    accessibility_id=独家
+    sleep    1s
+
+游戏中心首页--精品游戏列表之新游戏上架
+    [Tags]    author=hzzhengxinghua    tc_id=
+    Mobile Page Should Contain Element    accessibility_id=webview_ico_home_games_recommended_2x
+    Mobile Page Should Contain Text    AutoUI测试特供游戏求勿动hoho
+    sleep    1s
+
+游戏中心首页--我的游戏
+    [Tags]    no_auto    author=hzzhengxinghua    tc_id=

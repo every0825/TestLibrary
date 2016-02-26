@@ -1,0 +1,29 @@
+*** Settings ***
+Resource          ../PubResource_POM/Game_Web/Web_Bussiness.txt
+
+*** Variables ***
+${username}       RFUI自动化姓名
+${company}        RFUI自动化之开发商
+
+*** Test Cases ***
+账号设置
+    [Tags]    author=hzzhengxinghua    auto    tc_id=369490    suite_id=360297
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${username}    Util Add String    ${username}    ${randomstr}
+    ${company}    Util Add String    ${company}    ${randomstr}
+    Web登录页_登录易信游戏平台    18657181234    qa1234
+    Web开发者_账号设置    ${username}    ${company}
+    Web Page Should Contain    ${company}
+    [Teardown]    Web Close Browser
+
+开发者工具页面检查
+    [Tags]    author=hzzhengxinghua    auto    suite_id=360297    tc_id=369451
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    18657181234    qa1234
+    Web Go To    http://game.yixin.im/document/
+    Web Page Should Contain    接入GameSDK
+    Web Page Should Contain    接入支付SDK
+    Web Page Should Contain Element    //a[@href='http://game.yixin.im/document/yxgamesdk/android/guide']
+    Web Page Should Contain    SDK下载
+    [Teardown]    Web Close Browser

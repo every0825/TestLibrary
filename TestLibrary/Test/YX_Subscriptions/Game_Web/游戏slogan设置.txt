@@ -1,0 +1,29 @@
+*** Settings ***
+Force Tags        suite_id=360297
+Resource          ../PubResource_POM/Game_Web/Web_Bussiness.txt
+
+*** Variables ***
+${content}        游戏slogan测试
+
+*** Test Cases ***
+设置游戏slogan-aos
+    [Tags]    author=wangzhong    toreview    tc_id=369420    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${content}    Util Add String    ${content}    ${randomstr}
+    #${str}    Util Add String    //a[@data-slogan='    ${content}    ']
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营_进入AOS游戏slogan页面    ${content}    21
+    #Web Page Should Contain Element    ${str}
+    Web Page Should Contain    ${content}
+    [Teardown]    Web Close Browser
+
+设置游戏slogan-ios
+    [Tags]    author=wangzhong    toreview    tc_id=369466    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    util random string    英文    4
+    ${content}    util add string    ${content}    ${randomstr}
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营_进入IOS游戏slogan设置    ${content}    21
+    Web page should contain    ${content}
+    [Teardown]    Web Close Browser

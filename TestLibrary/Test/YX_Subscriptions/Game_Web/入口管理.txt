@@ -1,0 +1,111 @@
+*** Settings ***
+Force Tags        suite_id=360297
+Resource          ../PubResource_POM/Game_Web/Web_Bussiness.txt
+
+*** Variables ***
+${content}        我是UI自动化推荐游戏，请勿动
+
+*** Test Cases ***
+设置aos时效文案
+    [Tags]    author=hzfangbo1    tc_id=369440    toreview    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${content}    Util Add String    ${content}    ${randomstr}
+    ${str}    Util Add String    //input[@value='    ${content}    ']
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营__进入入口管理
+    Web运营__设置实效文案AOS    ${content}
+    Web运营__进入入口管理
+    Web Page Should Contain Element    ${str}
+    [Teardown]    Web Close Browser
+
+设置aos默认文案
+    [Tags]    author=hzfangbo1    tc_id=369441    toreview    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${content}    Util Add String    ${content}    ${randomstr}
+    ${str}    Util Add String    //input[@value='    ${content}    ']
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营__进入入口管理
+    Web运营__设置默认文案AOS    ${content}
+    Web运营__进入入口管理
+    Web Page Should Contain Element    ${str}
+    [Teardown]    Web Close Browser
+
+设置ios时效文案
+    [Tags]    author=hzfangbo1    tc_id=369442    toreview    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${content}    Util Add String    ${content}    ${randomstr}
+    ${str}    Util Add String    //input[@value='    ${content}    ']
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营__进入入口管理
+    Web运营_进入设置实效文案ios
+    Web运营__设置实效文案AOS    ${content}
+    Web运营__进入入口管理
+    Web运营_进入设置实效文案ios
+    Web Page Should Contain Element    ${str}
+    [Teardown]    Web Close Browser
+
+设置ios默认文案
+    [Tags]    author=hzfangbo1    tc_id=369443    toreview    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${content}    Util Add String    ${content}    ${randomstr}
+    ${str}    Util Add String    //input[@value='    ${content}    ']
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营__进入入口管理
+    Web运营_进入设置实效文案ios
+    Web运营__设置默认文案AOS    ${content}
+    Web运营__进入入口管理
+    Web运营_进入设置实效文案ios
+    Web Page Should Contain Element    ${str}
+    [Teardown]    Web Close Browser
+
+推广游戏设置_aos
+    [Tags]    author=hzfangbo1    tc_id=369444    toreview    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${content}    Util Add String    ${content}    ${randomstr}
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营__进入入口管理
+    sleep    2s
+    web运营_进入推广游戏_aos
+    sleep    2s
+    web运营_设置推广游戏    ${content}
+    sleep    3s
+    [Teardown]    Web Close Browser
+
+推广游戏设置_ios
+    [Tags]    author=hzfangbo1    tc_id=369445    toreview    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${content}    Util Add String    ${content}    ${randomstr}
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营__进入入口管理
+    Web运营_进入设置实效文案ios
+    sleep    2s
+    web运营_进入推广游戏_ios
+    web运营_设置推广游戏    ${content}
+    sleep    3s
+    [Teardown]    Web Close Browser
+
+设置热门活动_aos
+    [Tags]    author=hzfangbo1    tc_id=369446    toreview
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营__进入入口管理
+    Web运营_进入热门活动_aos
+    Web运营_设置热门活动_aos
+    [Teardown]    Web Close Browser
+
+设置热门活动_ios
+    [Tags]    author=hzfangbo1    tc_id=369485    toreview
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营__进入入口管理
+    Web运营_进入设置实效文案ios
+    sleep    2s
+    Web运营_进入热门活动_ios
+    Web运营_设置热门活动_ios
+    [Teardown]    Web Close Browser

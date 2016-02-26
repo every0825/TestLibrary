@@ -1,0 +1,42 @@
+*** Settings ***
+Resource          ../PubResource_POM/Mobile_Android/Android_Bussiness.txt
+
+*** Test Cases ***
+游戏分类页_分类索引检查
+    [Tags]    author=hzweiyating    tc_id=
+    AndroidAPP游戏中心页_进入游戏分类
+    sleep    5s
+    Mobile Page Should Contain Text    李明
+    Mobile Page Should Contain Text    呵呵
+    Mobile Page Should Contain Text    哈哈
+    Mobile Page Should Contain Text    丹尼
+    Mobile Page Should Contain Text    UI自动化
+
+游戏分类页_游戏排行榜检查
+    [Tags]    author=hzweiyating    tc_id=
+    Mobile Page Should Contain Element    //android.widget.ListView/android.view.View[1]
+    Mobile Page Should Contain Element    //android.widget.ListView/android.view.View[2]
+    Mobile Page Should Contain Element    //android.widget.ListView/android.view.View[3]
+
+游戏分类页_点击分类
+    [Tags]    author=hzweiyating    tc_id=
+    AndroidAPP游戏分类页_点击分类
+    sleep    2s
+    Mobile Page Should Contain Text    UI自动化测试游戏--勿动
+    Mobile Page Should Contain Text    下载
+    Mobile Click Element    accessibility_id=转到上一层级
+
+游戏分类页_点击底部tab
+    [Tags]    author=hzweiyating    tc_id=
+    AndroidApp游戏分类页_点击底部tab
+    sleep    5s
+    Mobile Page Should Contain Text    F1 Race Stars
+
+游戏分类页_游戏列表
+    [Tags]    author=hzweiyating    tc_id=
+    AndroidAPP游戏分类页_游戏列表
+    Mobile Page Should Contain Text    游戏简介
+    Mobile Click Element    accessibility_id=转到上一层级
+    sleep    1s
+    Mobile Click Element    accessibility_id=转到上一层级
+    sleep    2s

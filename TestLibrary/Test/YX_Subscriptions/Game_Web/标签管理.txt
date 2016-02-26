@@ -1,0 +1,15 @@
+*** Settings ***
+Force Tags        suite_id=360297
+Resource          ../PubResource_POM/Game_Web/Web_Bussiness.txt
+
+*** Test Cases ***
+设置索引为显示_aos
+    [Tags]    author=hzweiyating    tc_id=369427
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web标签管理_进入分类索引
+    Web标签管理_显示分类索引
+    [Teardown]    Web Close Browser
+
+设置索引为隐藏_aos
+    [Tags]    author=hzweiyating    tc_id=369428

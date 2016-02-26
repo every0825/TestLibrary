@@ -1,0 +1,23 @@
+*** Settings ***
+Documentation     Android_Config Jobs:
+...               <1>Commen libarary \ import
+...               <2>Mobile library import(AppiumLibrary, and DIY library)
+...               <3>Environment data setting/autoconfig on iOS mobile client
+...               \ Target devices\ Android version\ WD server\ Target APP , etc.
+Resource          common_resources.txt
+Library           AppiumLibrary    run_on_failure=applib.Capture Page Screenshot    WITH NAME    applib    # Lib for mobile app; Sets default timeout to 10 seconds and Capture Page Screenshot if failure happen
+Library           common_lib_mobile.py    # 提供统一的Mobile和Web端 UI基础关键词，分别以 Mobile_ 为前缀.
+
+*** Variables ***
+&{Android_Setting}    remote_server=http://localhost:4723/wd/hub    platformName=Android    platformVersion=None    deviceName=None    app=${CURDIR}/yixin_test.apk    appPackage=im.yixin    appActivity=im.yixin.activity.WelcomeActivity
+
+*** Keywords ***
+启动Android客户端应用
+    [Documentation]    启动Android客户端应用
+    Mobile Open Application    &{Android_Setting}[remote_server]    platformName=&{Android_Setting}[platformName]    platformVersion=&{Android_Setting}[platformVersion]    deviceName=&{Android_Setting}[deviceName]    app=&{Android_Setting}[app]    appPackage=&{Android_Setting}[appPackage]
+    ...    appActivity=&{Android_Setting}[appActivity]    #applib.Open Application    &{Android_Setting}[remote_server]    platformName=&{Android_Setting}[platformName]    platformVersion=&{Android_Setting}[platformVersion]    deviceName=&{Android_Setting}[deviceName]
+    ...    # app=&{Android_Setting}[app]    appPackage=&{Android_Setting}[appPackage]    # appActivity=&{Android_Setting}[appActivity]
+
+关闭Android客户端应用
+    [Documentation]    关闭Android客户端应用
+    Mobile Close Application

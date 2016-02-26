@@ -1,0 +1,20 @@
+*** Settings ***
+Force Tags        suite_id=360297
+Resource          ../PubResource_POM/Game_Web/Web_Bussiness.txt
+
+*** Test Cases ***
+礼包下架_aos
+    [Tags]    author=hzweiyating    tc_id=369409    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web礼包中心_进入礼包中心
+    Web礼包中心_礼包下架
+    [Teardown]    Web Close Browser
+
+礼包上架_aos
+    [Tags]    author=hzweiyating    tc_id=360408    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web礼包中心_进入礼包中心
+    Web礼包中心_礼包重新上架
+    [Teardown]    Web Close Browser

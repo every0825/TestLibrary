@@ -1,0 +1,6 @@
+*** Settings ***
+Force Tags        suite_id=360297
+
+*** Test Cases ***
+游戏最新设置_取消推荐_aos
+    [Tags]    author=hzzhengxinghua    tc_id=369414

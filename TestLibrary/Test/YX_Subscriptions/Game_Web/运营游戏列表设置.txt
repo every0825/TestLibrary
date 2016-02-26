@@ -1,0 +1,89 @@
+*** Settings ***
+Force Tags        suite_id=360297
+Resource          ../PubResource_POM/Game_Web/Web_Bussiness.txt
+
+*** Test Cases ***
+游戏最新设置_取消推荐_aos
+    [Documentation]    1、测试此功能点
+    ...    2、为后面的用例，清除干扰数据；
+    ...
+    ...    //todo
+    [Tags]    author=hzzhengxinghua    tc_id=369414
+
+设置游戏hot标签_aos
+    [Tags]    author=hzzhengxinghua    tc_id=369415    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营_进入游戏列表_aos
+    Web运营_设置游戏热门标签
+    [Teardown]    Web Close Browser
+
+设置游戏首发标签_aos
+    [Tags]    author=hzzhengxinghua    tc_id=369413    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营_进入游戏列表_aos
+    Web运营_设置游戏首发标签
+    [Teardown]    Web Close Browser
+
+设置游戏独家标签_aos
+    [Tags]    author=hzzhengxinghua    tc_id=369416    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营_进入游戏列表_aos
+    Web运营_设置游戏独家标签
+    [Teardown]    Web Close Browser
+
+设置游戏最新_大家都爱玩_aos
+    [Documentation]    前提：推荐游戏不能超过5个
+    ...    //todo 找开发添加id，如何精确设置某个游戏为最新，待优化判断是否满足推荐游戏小于5的条件
+    [Tags]    author=hzzhengxinghua    tc_id=369412
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营_进入游戏列表_aos
+    Web运营_设置游戏为最新
+    [Teardown]    Web Close Browser
+
+设置游戏hot标签_ios
+    [Tags]    author=hzzhengxinghua    auto    tc_id=369461
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营_进入游戏列表_ios
+    Web运营_设置游戏热门标签
+    [Teardown]    Web Close Browser
+
+设置游戏首发标签_ios
+    [Tags]    author=hzzhengxinghua    auto    tc_id=369459
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营_进入游戏列表_ios
+    Web运营_设置游戏首发标签
+    [Teardown]    Web Close Browser
+
+设置游戏独家标签_ios
+    [Tags]    author=hzzhengxinghua    auto    tc_id=369462
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营_进入游戏列表_ios
+    Web运营_设置游戏独家标签
+    [Teardown]    Web Close Browser
+
+游戏评级_aos
+    [Tags]    author=hzzhengxinghua    tc_id=369439    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_进入游戏列表_aos
+    Web运营_设置游戏级别
+    Web Page Should Contain Element    //td[@data-gameid='ga156b1df774b3426baea98fcdc4161e27']/div/a/span
+    [Teardown]    Web Close Browser
+
+游戏评级_ios
+    [Tags]    author=hzzhengxinghua    tc_id=369484    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_进入游戏列表_ios
+    Web运营_设置游戏级别
+    Web Page Should Contain Element    //td[@data-gameid='ga156b1df774b3426baea98fcdc4161e27']/div/a/span
+    [Teardown]    Web Close Browser

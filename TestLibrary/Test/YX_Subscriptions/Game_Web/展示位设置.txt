@@ -1,0 +1,49 @@
+*** Settings ***
+Resource          ../PubResource_POM/Game_Web/Web_Bussiness.txt
+
+*** Test Cases ***
+设置游戏一级banner-aos
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营__进入展示位
+    Web运营__设置一级banner_aos    ${CURDIR}${/}..${/}resource${/}有杀气-背景2.jpg    ${CURDIR}${/}..${/}resource${/}有杀气-文字2.png    ${CURDIR}${/}..${/}resource${/}有杀气-人物2.png
+    [Teardown]    Web Close Browser
+
+设置游戏一级banner-ios
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营__进入展示位
+    Web运营__设置一级banner_aos    ${CURDIR}${/}..${/}resource${/}有杀气-背景2.jpg    ${CURDIR}${/}..${/}resource${/}有杀气-文字2.png    ${CURDIR}${/}..${/}resource${/}有杀气-人物2.png
+    [Teardown]    Web Close Browser
+
+设置游戏二级banner-aos
+    [Tags]    author=hzfangbo1    tc_id=369418    toreview
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营__进入展示位
+    Web运营__设置游戏二级banner__aos    ${CURDIR}${/}..${/}resource${/}二级banner.jpg
+    [Teardown]    Web Close Browser
+
+设置游戏二级banner-ios
+    [Tags]    author=hzfangbo1    tc_id=369464    toreview
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营__进入展示位
+    Web运营__设置游戏二级banner__ios    ${CURDIR}${/}..${/}resource${/}二级banner.jpg
+    [Teardown]    Web Close Browser
+
+设置浮层推广位_aos
+    [Tags]    author=hzfangbo1    tc_id=369419    toreview
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营__进入展示位
+    Web运营__设置浮层推广位_aos    ${CURDIR}${/}..${/}resource${/}浮层推广位.png
+    [Teardown]    Web Close Browser
+
+设置浮层推广位_ios
+    [Tags]    author=hzfangbo1    tc_id=369465    toreview
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营__进入展示位
+    Web运营__设置浮层推广位_ios    ${CURDIR}${/}..${/}resource${/}推广位ios.png
+    [Teardown]    Web Close Browser

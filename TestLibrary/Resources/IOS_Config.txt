@@ -1,0 +1,27 @@
+*** Settings ***
+Documentation     IOS_Bussiness Jobs:
+...               <1>Commen library import
+...               <2>Mobile library import(AppiumLibrary, and DIY library)
+...               <3>Environment data setting/autoconfig on iOS mobile client
+...               \ Target devices\ iOS version\ WD server\ Target APP , etc.
+Resource          common_resources.txt
+Library           AppiumLibrary    run_on_failure=applib.Capture Page Screenshot    WITH NAME    applib    # Lib for mobile app; Sets default timeout to 10 seconds and Capture Page Screenshot if failure happen
+Library           common_lib_mobile.py    # 提供统一的Mobile和Web端 UI基础关键词，分别以 Mobile_ 为前缀.
+
+*** Variables ***
+${IOS_DUT_Remote_Server}    http://localhost:4723/wd/hub
+&{IOS_DUT_Capabilities}    platformName=iOS    platformVersion=8.4    deviceName=iPhone 5s    app=/Users/netease/Documents/adamwang/Debug-iphonesimulator_Xcode7_M40_1112/yixin_iphone.app    waitForAppScript=$.delay(3000); $.acceptAlert(); true;
+
+*** Keywords ***
+启动IOS客户端应用
+    [Documentation]    Open the app with pre setting in resource
+    ...    example: \ ${myappIndex} | 启动IOS客户端应用
+    ${app_index}    Mobile Open Application    ${IOS_DUT_Remote_Server}    &{IOS_DUT_Capabilities}
+    [Return]    ${app_index}
+
+关闭IOS客户端应用
+    [Arguments]    ${alias_or_index}=None
+    [Documentation]    Close the IOS APP.
+    ...    example: 关闭IOS客户端应用 \ | \ alias_or_index(Optional)
+    Run Keyword If    ${alias_or_index}!=None    Mobile Switch Application    ${alias_or_index}
+    Mobile Close Application

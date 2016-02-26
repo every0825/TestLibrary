@@ -1,0 +1,4 @@
+*** Settings ***
+Documentation     Common_resources jobs:
+...               <1> import 3rd part testlib (common_lib_util, etc.) for Technical Keyword
+Library           common_lib_util.py    # 提供基础操作关键词，以Util_ 为前缀，实现 <文本连接> <随机字符生成> 等功能

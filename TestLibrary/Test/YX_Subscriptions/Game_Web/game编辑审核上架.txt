@@ -1,0 +1,184 @@
+*** Settings ***
+Force Tags        suite_id=360297
+Resource          ../PubResource_POM/Game_Web/Web_Bussiness.txt
+
+*** Variables ***
+${gamename}       AutoUI测试特供游戏求勿动
+${gamedescription}    AutoUI测试特供游戏求勿动游戏介绍
+${gameupdatescription}    AutoUI测试特供游戏求勿动游戏介绍
+${reject_reason}    RFUI自动化驳回审核理由
+
+*** Test Cases ***
+开发者编辑游戏资料并提交审核_aos
+    [Tags]    author=hzzhengxinghua    tc_id=369406    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${gamename}    Util Add String    ${gamename}    aos    ${randomstr}
+    ${gamedescription}    Util Add String    ${gamedescription}    aos    ${randomstr}
+    ${gameupdatescription}    Util Add String    ${gameupdatescription}    aos    ${randomstr}
+    Web登录页_登录易信游戏平台    18657181234    qa1234
+    Web开发者_我的游戏列表页_提交版本_aos
+    Web开发者_游戏编辑资料页_编辑资料并提交    ${gamename}    ${gamedescription}    ${gameupdatescription}
+    Web开发者_游戏提交页_提交游戏_aos
+    退出登录
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营_进入AOS审核页面
+    Web Page Should Contain    ${gamename}
+    [Teardown]    Web Close Browser
+
+运营审核游戏_驳回_aos
+    [Tags]    author=hzzhengxinghua    auto    tc_id=369438
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${reject_reason}    Util Add String    ${reject_reason}    ${randomstr}
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营_进入AOS审核页面
+    Web运营_审核游戏_驳回_aos    //a[@data-value='ga156b1df774b3426baea98fcdc4161e27']    ${reject_reason}
+    sleep    2s
+    Web运营_进入AOS游戏驳回页面
+    Web Page Should Contain    ${reject_reason}
+    Web Page Should Contain    ${gamename}
+    [Teardown]    Web Close Browser
+
+运营审核游戏_通过_aos
+    [Tags]    author=hzzhengxinghua    tc_id=369407    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${gamename}    Util Add String    ${gamename}    aos    ${randomstr}
+    ${gamedescription}    Util Add String    ${gamedescription}    aos    ${randomstr}
+    ${gameupdatescription}    Util Add String    ${gameupdatescription}    aos    ${randomstr}
+    Web登录页_登录易信游戏平台    18657181234    qa1234
+    Web开发者_我的游戏列表页_提交版本_aos
+    Web开发者_游戏编辑资料页_编辑资料并提交    ${gamename}    ${gamedescription}    ${gameupdatescription}
+    Web开发者_游戏提交页_提交游戏_aos
+    退出登录
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营_进入AOS审核页面
+    Web运营_审核游戏_审核通过_aos    //a[@data-value='ga156b1df774b3426baea98fcdc4161e27']
+    sleep    2s
+    Web运营_进入AOS待发布页面
+    Web Page Should Contain Element    //a[@data-value='ga156b1df774b3426baea98fcdc4161e27']
+    [Teardown]    Web Close Browser
+
+重新审核游戏_aos
+    [Tags]    author=hzzhengxinghua    tc_id=369436    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营_进入AOS待发布页面
+    Web运营_重新审核游戏
+    Web运营_进入AOS审核页面
+    Web Page Should Contain Element    //a[@data-value='ga156b1df774b3426baea98fcdc4161e27']
+    Web运营_审核游戏_审核通过_aos    //a[@data-value='ga156b1df774b3426baea98fcdc4161e27']
+    sleep    2s
+    Web运营_进入AOS待发布页面
+    Web Page Should Contain Element    //a[@data-value='ga156b1df774b3426baea98fcdc4161e27']
+    [Teardown]    Web Close Browser
+
+上架一款游戏_aos
+    [Tags]    author=hzzhengxinghua    tc_id=369410    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_进入AOS待发布页面
+    sleep    2s
+    Web运营_发布游戏_aos
+    Web运营_进入AOS游戏库已发布页面
+    Web Page Should Contain Element    //a[@data-value='ga156b1df774b3426baea98fcdc4161e27']
+    [Teardown]    Web Close Browser
+
+已发布游戏开通官网_aos
+    [Tags]    author=hzzhengxinghua    tc_id=369435    toreview    auto
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_进入AOS游戏库已发布页面
+    Web运营_编辑官网_aos    ${CURDIR}${/}..${/}resource${/}haibao_aos.jpg
+    Web Page Should Contain Element    //img[@data-view='showqrcode']
+    [Teardown]    Web Close Browser
+
+开发者编辑游戏资料并提交审核_ios
+    [Tags]    author=hzzhengxinghua    tc_id=369452    auto    toreview
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${gamename}    Util Add String    ${gamename}    ios    ${randomstr}
+    ${gamedescription}    Util Add String    ${gamedescription}    ios    ${randomstr}
+    ${gameupdatescription}    Util Add String    ${gameupdatescription}    ios    ${randomstr}
+    Web登录页_登录易信游戏平台    18657181234    qa1234
+    Web开发者_我的游戏列表页_提交版本_ios
+    Web开发者_游戏编辑资料页_编辑资料并提交    ${gamename}    ${gamedescription}    ${gameupdatescription}
+    Web开发者_游戏提交页_提交游戏_ios
+    退出登录
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营_进入IOS审核页面
+    Web Page Should Contain Element    //a[@data-value='ga156b1df774b3426baea98fcdc4161e27']
+    [Teardown]    Web Close Browser
+
+运营审核游戏_驳回_ios
+    [Tags]    author=hzzhengxinghua    auto    tc_id=369483
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${reject_reason}    Util Add String    ${reject_reason}    ${randomstr}
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营_进入IOS审核页面
+    Web运营_审核游戏_驳回_ios    //a[@data-value='ga156b1df774b3426baea98fcdc4161e27']    ${reject_reason}
+    sleep    2s
+    Web运营_进入IOS游戏驳回页面
+    Web Page Should Contain    ${reject_reason}
+    Web Page Should Contain    ${gamename}
+    [Teardown]    Web Close Browser
+
+运营审核游戏_通过_ios
+    [Documentation]    前提：开发者编辑游戏资料并提交审核游戏用例必须pass
+    [Tags]    author=hzzhengxinghua    tc_id=369453    auto    toreview
+    [Setup]    Web Open Browser    https://game.yixin.im
+    ${randomstr}    Util Random String    数字    4
+    ${gamename}    Util Add String    ${gamename}    ios    ${randomstr}
+    ${gamedescription}    Util Add String    ${gamedescription}    ios    ${randomstr}
+    ${gameupdatescription}    Util Add String    ${gameupdatescription}    ios    ${randomstr}
+    Web登录页_登录易信游戏平台    18657181234    qa1234
+    Web开发者_我的游戏列表页_提交版本_ios
+    Web开发者_游戏编辑资料页_编辑资料并提交    ${gamename}    ${gamedescription}    ${gameupdatescription}
+    Web开发者_游戏提交页_提交游戏_ios
+    退出登录
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营_进入IOS审核页面
+    Web运营_审核游戏_审核通过_ios    //a[@data-value='ga156b1df774b3426baea98fcdc4161e27']
+    sleep    2s
+    Web运营_进入IOS待发布页面
+    Web Page Should Contain Element    //a[@data-value='ga156b1df774b3426baea98fcdc4161e27']
+    [Teardown]    Web Close Browser
+
+重新审核游戏_ios
+    [Tags]    author=hzzhengxinghua    auto    tc_id=369481
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web运营_进入IOS待发布页面
+    Web运营_重新审核游戏
+    Web运营_进入IOS审核页面
+    Web Page Should Contain Element    //a[@data-value='ga156b1df774b3426baea98fcdc4161e27']
+    Web运营_审核游戏_审核通过_ios    //a[@data-value='ga156b1df774b3426baea98fcdc4161e27']
+    sleep    2s
+    Web运营_进入IOS待发布页面
+    Web Page Should Contain Element    //a[@data-value='ga156b1df774b3426baea98fcdc4161e27']
+    [Teardown]    Web Close Browser
+
+上架一款游戏_ios
+    [Tags]    author=hzzhengxinghua    tc_id=369456    auto    toreview
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_进入IOS待发布页面
+    Web运营_发布游戏_ios
+    Web运营_进入IOS游戏库已发布页面
+    Web Page Should Contain Element    //a[@data-value='ga156b1df774b3426baea98fcdc4161e27']
+    [Teardown]    Web Close Browser
+
+已发布游戏开通官网_ios
+    [Tags]    author=hzzhengxinghua    toreview    auto    tc_id=369480
+    [Setup]    Web Open Browser    https://game.yixin.im
+    Web登录页_登录易信游戏平台    qatest4    123456
+    Web Maximize Browser Window
+    Web运营_进入IOS游戏库已发布页面
+    Web运营_编辑官网_ios    ${CURDIR}${/}..${/}resource${/}haibao_ios.jpg
+    Web Page Should Contain Element    //img[@data-view='showqrcode']
+    [Teardown]    Web Close Browser

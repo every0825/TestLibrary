@@ -1,0 +1,585 @@
+*** Settings ***
+Resource          UIElement.txt
+Resource          ../../../../Resources/Web_Config.txt
+
+*** Variables ***
+
+*** Keywords ***
+Web登录页_登录易信游戏平台
+    [Arguments]    ${易信账号}    ${密码}
+    Web Input Text    &{Web登录页}[input_username]    ${易信账号}
+    Web Input Password    &{Web登录页}[input_password]    ${密码}
+    Web Click Element    &{Web登录页}[button_login]
+    sleep    2s
+
+Web开发者_游戏编辑资料页_编辑资料并提交
+    [Arguments]    ${游戏名称}    ${游戏介绍}    ${更新内容}
+    sleep    5s
+    Web Input Text    &{Web开发者_游戏编辑资料页}[input_gamename]    ${游戏名称}
+    sleep    5s
+    Web Input Text    &{Web开发者_游戏编辑资料页}[textarea_game_description]    ${游戏介绍}
+    sleep    5s
+    Web Input Text    &{Web开发者_游戏编辑资料页}[textarea_game_updatecontents]    ${更新内容}
+    sleep    10s
+    Web Click Element    &{Web开发者_游戏编辑资料页}[button_save]
+    sleep    10s
+    Web Click Element    &{Web开发者_游戏编辑资料页}[button_continue_submit]
+    sleep    1s
+
+Web开发者_游戏提交页_提交游戏_aos
+    Web Click Element    &{Web开发者_游戏提交页}[button_submit]
+    sleep    1s
+    Web Click Element    &{Web开发者_游戏提交页}[button_confirm]
+    sleep    5s
+
+Web开发者_游戏提交页_提交游戏_ios
+    Web Click Element    &{Web开发者_游戏提交页}[button_submit]
+    sleep    5s
+
+退出登录
+    Web Click Element    //a[@title='退出']
+    sleep    1s
+
+Web运营_进入AOS审核页面
+    Web Go To    &{Web运营_AOS审核相关页}[link_aos_tocheck]
+    sleep    1
+
+Web运营_进入IOS审核页面
+    Web Go To    &{Web运营_IOS审核相关页}[link_ios_tocheck]
+    sleep    1
+
+Web开发者_我的游戏列表页_提交版本_aos
+    #Web Click Element    &{Web开发者_我的游戏列表页}[button_autouigame_submit]
+    Web Go To    http://game.yixin.im/my/game-ga156b1df774b3426baea98fcdc4161e27-flow-basic-android
+    sleep    2s
+
+Web开发者_我的游戏列表页_提交版本_ios
+    Web Go To    http://game.yixin.im/my/game-ga156b1df774b3426baea98fcdc4161e27-flow-basic-ios
+    sleep    2s
+
+Web运营_审核游戏_审核通过_aos
+    [Arguments]    ${待审核游戏}
+    Web Click Element    ${待审核游戏}
+    sleep    1s
+    Web Click Element    &{Web运营_AOS审核相关页}[button_step1_saveandgo]
+    sleep    1s
+    Web Click Element    &{Web运营_AOS审核相关页}[button_step2_saveandgo]
+    sleep    1s
+    Web Click Element    &{Web运营_AOS审核相关页}[label_pass]
+    Web Click Element    &{Web运营_AOS审核相关页}[label_remind_update]
+    Web Click Element    &{Web运营_AOS审核相关页}[button_step3_saveandgo]
+    sleep    1s
+    Web Click Element    &{Web运营_AOS审核相关页}[button_step4_saveandgo]
+    sleep    1s
+    Web Confirm Alert Ok
+
+Web运营_审核游戏_驳回_aos
+    [Arguments]    ${待审核游戏}    ${拒绝理由}
+    Web Click Element    ${待审核游戏}
+    sleep    1s
+    Web Click Element    &{Web运营_AOS审核相关页}[button_step1_saveandgo]
+    sleep    1s
+    Web Click Element    &{Web运营_AOS审核相关页}[button_step2_saveandgo]
+    sleep    1s
+    Web Click Element    &{Web运营_AOS审核相关页}[label_reject]
+    sleep    2s
+    Web Input Text    &{Web运营_AOS审核相关页}[textarea_reject_reason]    ${拒绝理由}
+    Web Click Element    &{Web运营_AOS审核相关页}[button_step3_saveandgo]
+    sleep    1s
+
+Web运营_审核游戏_审核通过_ios
+    [Arguments]    ${待审核游戏}
+    Web Click Element    ${待审核游戏}
+    sleep    1s
+    Web Click Element    &{Web运营_IOS审核相关页}[button_step1_saveandgo]
+    sleep    1s
+    Web Click Element    &{Web运营_IOS审核相关页}[button_step2_saveandgo]
+    sleep    1s
+    Web Click Element    &{Web运营_IOS审核相关页}[label_pass]
+    Web Click Element    &{Web运营_IOS审核相关页}[button_step3_saveandgo]
+    sleep    1s
+    Web Confirm Alert Ok
+
+Web运营_审核游戏_驳回_ios
+    [Arguments]    ${待审核游戏}    ${拒绝理由}
+    Web Click Element    ${待审核游戏}
+    sleep    1s
+    Web Click Element    &{Web运营_IOS审核相关页}[button_step1_saveandgo]
+    sleep    1s
+    Web Click Element    &{Web运营_IOS审核相关页}[button_step2_saveandgo]
+    sleep    1s
+    Web Click Element    &{Web运营_IOS审核相关页}[label_reject]
+    sleep    2s
+    Web Input Text    &{Web运营_IOS审核相关页}[textarea_reject_reason]    ${拒绝理由}
+    sleep    1s
+    Web Click Element    &{Web运营_IOS审核相关页}[button_step3_saveandgo]
+    sleep    1s
+    Web Confirm Alert Ok
+    sleep    1s
+
+Web运营_进入AOS待发布页面
+    Web Go To    http://game.yixin.im/backend/op/censor/android-30-games
+    sleep    2s
+
+Web运营_进入IOS待发布页面
+    Web Go To    http://game.yixin.im/backend/op/censor/ios-30-games
+    sleep    2s
+
+Web标签管理_进入分类索引
+    Web Go To    https://game.yixin.im/backend/op/tags-category-aos-games/
+    sleep    2s
+
+Web标签管理_显示分类索引
+    Web Click Element    &{Web标签管理_分类索引}[button_edit]
+    sleep    2s
+    Web Click Element    &{Web标签管理_分类索引}[button_danni]
+    sleep    2s
+    Web Click Element    &{Web标签管理_分类索引}[radio_yes]
+    Web Click Element    &{Web标签管理_分类索引}[select_dropdownlist]
+    Web Click Element    &{Web标签管理_分类索引}[option_orderf]
+    Web Click Element    &{Web标签管理_分类索引}[button_save]
+
+Web标签管理_隐藏分类索引
+
+Web礼包中心_礼包下架
+    Web Click Element    &{Web礼包中心}[gift_soldout]
+    Web Page Should Contain    下架礼包（展开）
+
+Web礼包中心_进入礼包中心
+    Web Go To    https://game.yixin.im/backend/op/aos-gifts-games-all/
+    Web Click Element    &{Web礼包中心}[view_game]
+    sleep    2s
+
+Web礼包中心_礼包重新上架
+    Web Click Element    &{Web礼包中心}[view_expanding]
+    Web Click Element    &{Web礼包中心}[button_saleagain]
+    Web Page Should Contain    上架
+
+Web运营_发布游戏_aos
+    Web Click Element    &{Web运营_发布相关页}[button_publish]
+    #${num_element}    Web Get Elements Num    &{Web运营_发布相关页}[button_publish]
+    #log    ${num_element}
+    sleep    2s
+    Web Click Element    //button[2]
+    sleep    2s
+
+Web运营_发布游戏_ios
+    Web Click Element    &{Web运营_发布相关页}[button_publish]
+    sleep    2s
+    Web Input Text    &{Web运营_发布相关页}[input_itunes_url]    https://itunes.apple.com/ch/app/ren-zhe-bi-xu-si2/id854435471?l=zh&ls=1&mt=8
+    sleep    1s
+    Web Click Element    //button[2]
+    sleep    2s
+
+Web运营_进入AOS游戏库已发布页面
+    Web Go To    &{Web运营_AOS游戏库相关页}[link_aos_released]
+    sleep    2s
+
+Web运营_进入IOS游戏库已发布页面
+    Web Go To    &{Web运营_IOS游戏库相关页}[link_aos_released]
+    sleep    2s
+
+Web运营_下架游戏_aos
+    Web Click Element    &{Web运营_AOS游戏库相关页}[button_underreleased]
+    sleep    1s
+    Web Click Element    &{Web运营_AOS游戏库相关页}[button_confirm_underrelease]
+    sleep    2s
+
+Web运营_下架游戏_ios
+    Web Click Element    &{Web运营_IOS游戏库相关页}[button_underreleased]
+    sleep    1s
+    Web Click Element    &{Web运营_IOS游戏库相关页}[button_confirm_underrelease]
+    sleep    2s
+
+Web运营_进入游戏列表_aos
+    Web Go To    http://game.yixin.im/backend/op/games-sort/
+    sleep    2s
+
+Web运营_设置游戏热门标签
+    Web Click Element    &{Web运营_游戏列表}[label_hotgame]
+    Web Click Element    &{Web运营_游戏列表}[button_save]
+    sleep    1s
+    Web Click Element    &{Web运营_游戏列表}[button_close]
+    sleep    1s
+
+Web运营_设置游戏独家标签
+    Web Click Element    &{Web运营_游戏列表}[label_onlyreleased]
+    Web Click Element    &{Web运营_游戏列表}[button_save]
+    sleep    1s
+    Web Click Element    &{Web运营_游戏列表}[button_close]
+    sleep    1s
+
+Web运营_设置游戏首发标签
+    Web Click Element    &{Web运营_游戏列表}[label_firstreleased]
+    Web Click Element    &{Web运营_游戏列表}[button_save]
+    sleep    1s
+    Web Click Element    &{Web运营_游戏列表}[button_close]
+    sleep    1s
+
+Web运营_设置游戏为最新
+    Web Click Element    &{Web运营_游戏列表}[button_set_newgame]
+    sleep    1s
+    Web Click Element    &{Web运营_游戏列表}[button_save]
+    sleep    1s
+    Web Click Element    &{Web运营_游戏列表}[button_close]
+    sleep    1s
+
+Web运营__进入入口管理
+    Web Go To    http://game.yixin.im/backend/op/subheading
+    sleep    2s
+
+Web运营__设置实效文案AOS
+    [Arguments]    ${实效文案}
+    Web Input Text    &{Web运营_入口管理页}[input_1]    ${实效文案}
+    Web Click Element    &{Web运营_入口管理页}[game_choose1]
+    Web Click Element    &{Web运营_入口管理页}[game_choose2]
+    sleep    2s
+    Web Click Element    &{Web运营_入口管理页}[save_1]
+    sleep    2s
+
+Web运营__设置默认文案AOS
+    [Arguments]    ${输入文案}
+    Web Input Text    &{Web运营_入口管理页}[input_2]    ${输入文案}
+    Web Click Element    &{Web运营_入口管理页}[save_2]
+    sleep    2s
+
+Web运营_进入游戏列表_ios
+    Web Go To    http://game.yixin.im/backend/op/games-sort?op=IOS
+    sleep    2s
+
+Web运营_编辑官网_aos
+    [Arguments]    ${海报path}
+    Web Click Element    &{Web运营_编辑官网}[button_edit]
+    sleep    2s
+    Web Select Frame    &{Web运营_编辑官网}[iframe]
+    #${a}    Web Get Elements Num    &{Web运营_编辑官网_aos}button_x
+    sleep    3
+    Web Click Element    &{Web运营_编辑官网}[button_x]
+    sleep    2s
+    Web Choose File    &{Web运营_编辑官网}[button_upload]    ${海报path}
+    sleep    3s
+    Web Click Element    &{Web运营_编辑官网}[button_save]
+    sleep    2s
+
+Web运营_编辑官网_ios
+    [Arguments]    ${海报path}
+    Web Click Element    &{Web运营_编辑官网}[button_edit]
+    sleep    2s
+    Web Select Frame    &{Web运营_编辑官网}[iframe]
+    #${a}    Web Get Elements Num    &{Web运营_编辑官网_aos}button_x
+    sleep    3
+    Web Click Element    &{Web运营_编辑官网}[button_x]
+    sleep    2s
+    Web Choose File    &{Web运营_编辑官网}[button_upload]    ${海报path}
+    sleep    3s
+    Web Click Element    &{Web运营_编辑官网}[button_save]
+    sleep    2s
+
+Web运营_进入游戏下架历史记录页面_aos
+    Web Go To    http://game.yixin.im/backend/op/release/android-100-games
+    sleep    2s
+
+Web运营_进入游戏下架历史记录页面_ios
+    Web Go To    http://game.yixin.im/backend/op/release/ios-100-games
+    sleep    2s
+
+Web开发者_账号设置
+    [Arguments]    ${username}    ${companyname}
+    Web Go To    http://game.yixin.im/my/account
+    sleep    2s
+    Web Input Text    &{Web开发者_账号设置}[username]    ${username}
+    Web Input Text    &{Web开发者_账号设置}[companyname]    ${companyname}
+    Web Click Element    &{Web开发者_账号设置}[button_save]
+    sleep    3s
+
+Web运营_重新审核游戏
+    Web Click Element    //a[@data-value='ga156b1df774b3426baea98fcdc4161e27'][2]
+    sleep    2s
+    Web Click Text Button    确定
+    sleep    1s
+
+Web运营_进入AOS游戏驳回页面
+    Web Go To    http://game.yixin.im/backend/op/censor/android-20-games
+    sleep    2s
+
+Web运营_进入IOS游戏驳回页面
+    Web Go To    http://game.yixin.im/backend/op/censor/ios-20-games
+    sleep    2s
+
+Web运营_进入活动编辑页面
+    [Arguments]    ${活动编辑url}
+    Web Go To    ${活动编辑url}
+    sleep    3s
+
+Web运营_编辑活动并保存
+    [Arguments]    ${title}    ${description}    ${activityRule}    ${receiveWay}    ${activitypicpath}
+    Web Input Text    &{Web运营_活动编辑页}[title]    ${title}
+    Web Input Text    &{Web运营_活动编辑页}[description]    ${description}
+    Web Input Text    &{Web运营_活动编辑页}[activityRule]    ${activityRule}
+    Web Input Text    &{Web运营_活动编辑页}[receiveWay]    ${receiveWay}
+    Web Click Element    &{Web运营_活动编辑页}[x]
+    Web Choose File    &{Web运营_活动编辑页}[uploadfile]    ${activitypicpath}
+    sleep    1s
+    Web Click Text Button    保存
+    sleep    3s
+
+Web运营_上架活动
+    [Arguments]    ${url}    ${activityxpath}
+    Web Go To    ${url}
+    sleep    2s
+    Web Click Text Button    已下架活动（展开）
+    #Web Click Element    //div[@id='J-toggle-unsueActivityList']
+    sleep    2s
+    Web Click Element    ${activityxpath}
+    sleep    5s
+
+Web运营_下架活动
+    [Arguments]    ${url}    ${下架活动xpath}
+    Web Go To    ${url}
+    sleep    2s
+    Web Click Element    ${下架活动xpath}
+    sleep    2s
+
+Web运营_编辑公告活动
+    [Arguments]    ${title}    ${description}    ${activitypicpath}
+    Web Input Text    &{Web运营_活动编辑页}[title]    ${title}
+    Web Input Text    &{Web运营_活动编辑页}[description]    ${description}
+    Web Click Element    &{Web运营_活动编辑页}[x]
+    Web Choose File    &{Web运营_活动编辑页}[uploadfile]    ${activitypicpath}
+    sleep    1s
+    Web Click Text Button    保存
+    sleep    3s
+
+Web运营_编辑专题活动
+    [Arguments]    ${title}    ${description}    ${activitypicpath}    ${editRecommend}
+    Web Input Text    &{Web运营_活动编辑页}[title]    ${title}
+    Web Input Text    &{Web运营_活动编辑页}[description]    ${description}
+    Web Click Element    &{Web运营_活动编辑页}[x]
+    Web Choose File    &{Web运营_活动编辑页}[uploadfile]    ${activitypicpath}
+    sleep    1s
+    Web Input Text    &{Web运营_活动编辑页}[editRecommend]    ${editRecommend}
+    Web Click Text Button    保存
+    sleep    3s
+
+Web运营_设置游戏级别
+    Web Click Element    &{Web运营_游戏列表}[button_choosegarde]
+    sleep    1s
+    Web Click Chosen Element    &{Web运营_游戏列表}[grade_A+]
+    sleep    3s
+    sleep    2s
+
+Web运营_进入AOS游戏slogan页面
+    [Arguments]    ${游戏slogan}    ${换算系数}
+    Web Go To    http://game.yixin.im/backend/op/games-sort/
+    Web Hover And Click    &{Web运营_aos游戏slogan设置}[emg_edit]    &{Web运营_aos游戏slogan设置}[slogan_edit]
+    sleep    1s
+    Web Input Text    &{Web运营_aos游戏slogan设置}[input_slogan]    ${游戏slogan}
+    Web input text    &{Web运营_aos游戏slogan设置}[input_hsxs]    ${换算系数}
+    Web Click Element    &{Web运营_aos游戏slogan设置}[button_save]
+    sleep    3s
+
+Web运营_AOS游戏推荐
+    web go to    http://game.yixin.im/backend/op/recommend-game-aos
+    sleep    2s
+    web click Element    &{运营后台_aos游戏推荐}[game_chose1]
+    web click element    &{运营后台_aos游戏推荐}[game_chose2]
+    sleep    1s
+    web click element    &{运营后台_aos游戏推荐}[game_chose3]
+    web click element    &{运营后台_aos游戏推荐}[game_chose4]
+    sleep    1s
+    web click element    &{运营后台_aos游戏推荐}[save]
+    sleep    3s
+
+Web运营_进入IOS游戏slogan设置
+    [Arguments]    ${游戏slogan}    ${换算系数}
+    web go to    http://game.yixin.im/backend/op/games-sort?op=IOS
+    Web Hover And Click    &{Web运营_ios游戏slogan设置}[emg_edit]    &{Web运营_ios游戏slogan设置}[slogan_edit]
+    sleep    1s
+    Web Input Text    &{Web运营_ios游戏slogan设置}[input_slogan]    ${游戏slogan}
+    Web input text    &{Web运营_ios游戏slogan设置}[input_hsxs]    ${换算系数}
+    Web Click Element    &{Web运营_ios游戏slogan设置}[button_save]
+    sleep    3s
+
+Web运营_IOS游戏推荐
+    web go to    http://game.yixin.im/backend/op/recommend-game-ios
+    sleep    2s
+    web click Element    &{运营后台_ios游戏推荐}[game_chose1]
+    web click element    &{运营后台_ios游戏推荐}[game_chose2]
+    sleep    1s
+    web click element    &{运营后台_ios游戏推荐}[game_chose3]
+    web click element    &{运营后台_ios游戏推荐}[game_chose4]
+    sleep    1s
+    web click element    &{运营后台_ios游戏推荐}[save]
+    sleep    3s
+
+Web运营_进入设置实效文案ios
+    Web Go To    http://game.yixin.im/backend/op/subheading?op=IOS
+    sleep    2s
+
+Web运营_设置实效文案_ios
+    [Arguments]    ${实效文案}
+    Web Input Text    &{Web运营_入口管理页}[input_1]    ${实效文案}
+    Web Click Element    &{Web运营_入口管理页}[game_choose1]
+    Web Click Element    &{Web运营_入口管理页}[game_choose2]
+    sleep    2s
+    Web Click Element    &{Web运营_入口管理页}[save_1]
+    sleep    2s
+
+web运营_进入推广游戏_aos
+    Web Click Element    &{Web运营_入口管理页}[click_1]
+    sleep    1s
+
+web运营_设置推广游戏
+    [Arguments]    ${推广游戏}
+    Web Click Element    &{Web运营_入口管理页}[click_2]
+    Web Click Element    &{Web运营_入口管理页}[click_3]
+    sleep    2s
+    Web Click Element    &{Web运营_入口管理页}[click_4]
+    Web Input Text    &{Web运营_入口管理页}[input_3]    ${推广游戏}
+    Web Click Element    &{Web运营_入口管理页}[click_5]
+    sleep    3s
+    Web Click Element    &{Web运营_入口管理页}[click_6]
+    Web Click Element    &{Web运营_入口管理页}[click_7]
+    sleep    2s
+    Web Click Element    &{Web运营_入口管理页}[click_8]
+    Web Input Text    &{Web运营_入口管理页}[input_4]    ${推广游戏}
+    Web Click Element    &{Web运营_入口管理页}[click_9]
+
+web运营_进入推广游戏_ios
+    Web Click Element    &{Web运营_入口管理页}[click_10]
+    sleep    1s
+
+Web运营_进入热门活动_aos
+    Web Click Element    &{Web运营_入口管理页}[click_11]
+    sleep    2s
+
+Web运营_进入热门活动_ios
+    Web Click Element    &{Web运营_入口管理页}[click_12]
+    sleep    1s
+
+Web运营_设置热门活动_aos
+    Web Click Element    &{Web运营_入口管理页}[click_13]
+    Web Click Element    &{Web运营_入口管理页}[click_14]
+    Web Click Element    &{Web运营_入口管理页}[click_15]
+
+Web运营_设置热门活动_ios
+    Web Click Element    &{Web运营_入口管理页}[click_16]
+    Web Click Element    &{Web运营_入口管理页}[click_17]
+    Web Click Element    &{Web运营_入口管理页}[click_18]
+
+Web运营_创建AOS攻略
+    [Arguments]    ${title}    ${descript}    ${tag}    ${link}    ${path}    ${fieldname}
+    web go to    http://game.yixin.im/backend/op/strategy/aos-game-list
+    web click Element    &{创建aos攻略}[button1]
+    sleep    1s
+    Web Input Text    &{创建aos攻略}[title]    ${title}
+    Web Input Text    &{创建aos攻略}[descript]    ${descript}
+    Web Input Text    &{创建aos攻略}[tag]    ${tag}
+    Web Input Text    &{创建aos攻略}[link]    ${link}
+    web click Element    &{创建aos攻略}[fieldname]
+    web click element    &{创建aos攻略}[game_chose1]
+    web click element    &{创建aos攻略}[game_chose2]
+    #web click Element    &{创建aos攻略}[x]
+    web choose file    name=file    ${path}    #&{创建aos攻略}[upload]
+    sleep    3s
+    web click element    &{创建aos攻略}[submit]
+    sleep    2s
+
+Web运营_创建IOS攻略
+    [Arguments]    ${title}    ${descript}    ${tag}    ${link}    ${path}
+    web go to    http://game.yixin.im/backend/op/strategy/ios-game-list/
+    web click Element    &{创建ios攻略}[button1]
+    sleep    1s
+    Web Input Text    &{创建ios攻略}[title]    ${title}
+    Web Input Text    &{创建ios攻略}[descript]    ${descript}
+    Web Input Text    &{创建ios攻略}[tag]    ${tag}
+    Web Input Text    &{创建ios攻略}[link]    ${link}
+    web click Element    &{创建ios攻略}[fieldname]
+    web click element    &{创建ios攻略}[game_chose1]
+    web click element    &{创建ios攻略}[game_chose2]
+    #web click element    &{创建ios攻略}[x]
+    web choose file    name=file    ${path}
+    sleep    2s
+    web click Element    &{创建ios攻略}[submit]
+
+Web运营_删除AOS攻略
+    web go to    http://game.yixin.im/backend/op/strategy/aos-game-list/
+    Web Click Text Button    李胜伟test
+    #web click element    ${删除aos攻略}[game]
+    sleep    1s
+    web click element    ${删除aos攻略}[delete]
+    sleep    2s
+
+Web运营_删除IOS攻略
+    web go to    http://game.yixin.im/backend/op/strategy/ios-game-list/
+    web click element    ${删除ios攻略}[game]
+    web click element    ${删除ios攻略}[game]
+    web page should not contain element    ${删除ios攻略}[content]
+
+Web运营__进入展示位
+    Web Click Text Button    展示位
+    sleep    2s
+
+Web运营__设置一级banner_aos
+    [Arguments]    ${path1}    ${path2}    ${path3}
+    Web Click Element    //*[@id="J-save-banners"]/div[2]/div/b[1]
+    sleep    3s
+    Web Choose File    //input[@id='cmd-1456280111406']    ${path1}
+    Web Choose File    //input[@id="cmd-1456219763741"]    ${path2}
+    Web Choose File    //input[@id="cmd-1456219763742"]    ${path3}
+    sleep    3s
+    Web Click Element    //*[@id="J-ui-selectable-100"]/p[2]/b
+
+Web运营__设置一级banner_ios
+
+Web运营__设置游戏二级banner__aos
+    [Arguments]    ${path}
+    Web Maximize Browser Window
+    sleep    5s
+    Web Click Element    //div[@id='J-ui-selectable-100']/p/b[2]
+    sleep    2s
+    Web Click Element    //*[@id="J-save-banners"]/div[1]/div/b
+    Web Choose File    //input[@name='file']    ${path}
+    sleep    2s
+    Web Click Element    //*[@id="J-ui-selectable-100"]/p[3]/button
+    sleep    3s
+
+Web运营__设置游戏二级banner__ios
+    [Arguments]    ${path}
+    Web Maximize Browser Window
+    sleep    2s
+    Web Click Text Button    iOS
+    sleep    3s
+    Web Click Element    //div[@id='J-ui-selectable-100']/p/b[2]
+    sleep    2s
+    Web Click Element    //*[@id="J-save-banners"]/div[1]/div/b
+    Web Choose File    //input[@name='file']    ${path}
+    sleep    4s
+    Web Click Element    //*[@id="J-ui-selectable-100"]/p[3]/button
+    sleep    3s
+
+Web运营__设置浮层推广位_aos
+    [Arguments]    ${path}
+    Web Maximize Browser Window
+    sleep    5s
+    Web Click Element    //div[@id='J-ui-selectable-100']/p/b[3]
+    sleep    2s
+    Web Click Element    //*[@id="J-save-banners"]/div[9]/div/b
+    Web Choose File    //*[@id="file-1456218376772"]    ${path}
+    sleep    5s
+    Web Click Element    //*[@id="J-ui-selectable-100"]/p[3]/button
+    sleep    5s
+
+Web运营__设置浮层推广位_ios
+    [Arguments]    ${path}
+    Web Maximize Browser Window
+    sleep    2s
+    Web Click Text Button    iOS
+    sleep    5s
+    Web Click Element    //div[@id='J-ui-selectable-100']/p/b[3]
+    sleep    2s
+    Web Click Element    //*[@id="J-save-banners"]/div[8]/div/b
+    Web Choose File    //input[@name='file']    ${path}
+    sleep    5s
+    Web Click Element    //*[@id="J-ui-selectable-100"]/p[3]/button
+    sleep    5s

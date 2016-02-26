@@ -1,0 +1,125 @@
+*** Settings ***
+Resource          UIElement.txt
+Resource          ../../../../Resources/Android_Config.txt
+
+*** Keywords ***
+AndroidAPP登录页_登入Android易信APP
+    [Arguments]    ${用户名}    ${密码}
+    [Documentation]    登录Android易信APP
+    Mobile Click Element    &{AndroidAPP欢迎页}[button_login]
+    Mobile Input Text    &{AndroidAPP登录页}[input_username]    ${用户名}
+    Mobile Input Text    &{AndroidAPP登录页}[input_password]    ${密码}
+    Mobile Click Element    &{AndroidAPP登录页}[button_login]
+    sleep    3s
+    Mobile Click Element    &{AndroidAPP登录页}[button_login]
+
+AndroidAPP主页_进入搜索框
+    Mobile Click Element    &{Android主页}[button_search]
+
+AndroidAPP搜索页_搜索内容
+    [Arguments]    ${搜索内容}
+    Mobile Input Text    &{AndroidAPP搜索页}[edittext]    ${搜索内容}
+
+AndroidAPP主页_进入好友页
+    Mobile Click Element    &{AndroidAPP主页}[button_friend]
+
+AndroidAPP好友页_进入公众号页
+    Mobile Click Element    &{AndroidAPP好友页}[button_plus]
+    sleep    10s
+
+AndroidAPP公众号分类页_进入指定公众号
+    [Arguments]    ${公众号名称}
+    [Documentation]    参数格式是accessibility_id=hzdonghao
+    Mobile Click Element    ${公众号名称}
+
+AndroidAPP公众号名片页_进入查看消息
+    Mobile Swipe    300    800    300    400    500
+    Mobile Click Element    &{AndroidAPP公众号名片页}[button_chatmsg]
+
+AndroidAPP公众号聊天页_发送文本消息
+    [Arguments]    ${msg}
+    [Documentation]    发送文本消息
+    Mobile Input Text    &{AndroidAPP公众号聊天页}[input_edittext]    ${msg}
+    Mobile Click Element    &{AndroidAPP公众号聊天页}[button_sendmsg]
+
+AndroidAPP主页_进入发现页
+    [Documentation]    从主页进入发现页
+    Mobile Click Element    &{AndroidAPP主页}[button_found]
+
+AndroidAPP发现页_进入游戏中心
+    sleep    5s
+    Mobile Click Element    &{AndroidAPP发现页}[button_game]
+    #Mobile Click Element    ${返回按钮}
+    #Mobile Click Element    &{AndroidAPP发现页}[button_game]
+
+AndroidAPP登录页_线上登入Android易信APP
+    [Arguments]    ${用户名}    ${密码}
+    Mobile Click Element    &{AndroidAPP欢迎页}[button_login]
+    Mobile Input Text    &{AndroidAPP登录页}[input_username]    ${用户名}
+    Mobile Input Text    &{AndroidAPP登录页}[input_password]    ${密码}
+    Mobile Click Element    &{AndroidAPP登录页}[button_login]
+    sleep    3s
+
+AndroidAPP游戏中心页_进入活动中心
+    Mobile Click Element    &{AndroidAPP游戏中心页}[view_activitycenter]
+
+AndroidAPP活动中心页_判断是否包含文字
+    [Arguments]    ${验证文字}
+    sleep    5s
+    Mobile Page Should Contain Text    ${验证文字}
+
+AndroidAPP游戏中心页_判断首次进入广告浮层是否加载并关闭
+    [Arguments]    ${验证关闭元素}
+    [Documentation]    通过判断是否存在浮层弹框关闭按钮来判断
+    ...    验证完毕后，关闭浮层弹窗
+    sleep    3s
+    Mobile Page Should Contain Element    ${验证关闭元素}
+    Mobile Click Element    &{AndroidAPP游戏中心页}[button_quit]
+
+AndroidAPP发现页_检查游戏中心入口文案是否显示
+    [Arguments]    ${入口文案}    # 后台设置此文案,时效文案或者默认文案
+    Mobile Page Should Contain Text    ${入口文案}
+
+AndroidAPP游戏中心页_进入礼包中心
+    Mobile Click Element    &{AndroidAPP游戏中心页}[view_giftcenter]
+    Mobile Page Should Contain Text    UI自动化测试游戏--勿动
+
+AndroidAPP游戏中心页_进入抢先专区
+    Mobile Click Element    &{AndroidAPP游戏中心页}[view_gamefirstzone]
+
+AndroidAPP游戏中心页_点击一级banner
+    [Documentation]    前提：后台banner设置，必须进入游戏详情页
+    Mobile Click Element    &{AndroidAPP游戏中心页}[view_banner1]
+
+AndroidAPP游戏中心页_点击二级banner
+    [Documentation]    前提：后台二级banner设置，必须进入游戏详情页
+    Mobile_Click_WebView_Element    &{AndroidAPP游戏中心页}[view_banner2]
+
+AndroidAPP游戏中心页_点击更多游戏进入游戏分类
+    Mobile_Click_WebView_Element    &{AndroidAPP游戏中心页}[view_more_games]
+    sleep    2s
+
+AndroidAPP游戏中心页_进入游戏分类
+    Mobile Click Element    &{AndroidAPP游戏中心页}[view_gametype]
+
+AndroidAPP游戏分类页_点击分类
+    Mobile Click Element    &{AndroidAPP游戏分类页}[view_uitest]
+
+AndroidApp游戏分类页_点击底部tab
+    Mobile Click Element    &{AndroidAPP游戏分类页}[view_qipai]
+
+AndroidAPP游戏分类页_游戏列表
+    Mobile Click Element    &{AndroidAPP游戏列表页}[view_racestars]
+    sleep    5s
+
+AndroidAPP礼包中心_检查礼包
+    Mobile Page Should Contain Text    领取
+
+AndroidAPP礼包中心_点击礼包
+    Mobile Click Element    &{AndroidAPP游戏礼包中心页}[view_uitest]
+
+AndroidApp游戏详情页_点击进入游戏详细信息展示页
+    Mobile_Click_WebView_Element    &{AndroidAPP游戏详情页}[link_gamedetail]
+    #Mobile Click Element
+    #Mobile Click Text Button    游戏详细信息
+    sleep    1s
